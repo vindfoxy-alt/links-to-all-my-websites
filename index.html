@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>vindfoxy – tabletop games and tools</title>
+  <meta name="description" content="Fan-made tabletop RPGs and tools by vindfoxy: Spirit Pressure (Bleach TTRPG), the World Trigger TTRPG, and Link Check.">
+  <meta property="og:title" content="vindfoxy – tabletop games and tools">
+  <meta property="og:description" content="Fan-made tabletop RPGs and tools: Spirit Pressure, the World Trigger TTRPG, and Link Check.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#090c12">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M100 30 160 65 100 100 40 65Z' fill='%2394e8ff'/%3E%3Cpath d='M40 65 100 100V170L40 135Z' fill='%232aa8cf'/%3E%3Cpath d='M100 100 160 65V135L100 170Z' fill='%231a6f93'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --bg: #090c12;
+      --panel: #10151f;
+      --panel-2: #151b28;
+      --line: #232c3d;
+      --text: #e8edf6;
+      --muted: #94a0b6;
+      --trion: #5ad1f5;
+      --trion-deep: #1a6f93;
+      --bleach: #ff8a3d;
+      --tool: #8bd88b;
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(900px 500px at 50% -120px, rgba(90, 209, 245, .12), transparent 70%),
+        var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    a { color: inherit; }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 0 22px; }
+
+    /* ---------- hero ---------- */
+    header.hero { text-align: center; padding: 64px 0 40px; }
+    .cube { width: 132px; height: 132px; display: block; margin: 0 auto 18px; filter: drop-shadow(0 0 22px rgba(90, 209, 245, .35)); animation: float 6s ease-in-out infinite; }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+    h1 { margin: 0; font-size: clamp(2.2rem, 6vw, 3.4rem); letter-spacing: .14em; text-transform: lowercase; font-weight: 700; }
+    .tagline { margin: 10px auto 0; max-width: 34em; color: var(--muted); font-size: 1.05rem; }
+
+    /* ---------- sections ---------- */
+    section { padding: 26px 0 10px; }
+    .section-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 16px; }
+    h2 { margin: 0; font-size: .85rem; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); font-weight: 600; white-space: nowrap; }
+    .section-head::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+    .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+    .card {
+      --accent: var(--trion);
+      position: relative;
+      background: linear-gradient(180deg, var(--panel-2), var(--panel));
+      border: 1px solid var(--line);
+      border-top: 3px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 24px 24px 22px;
+      display: flex;
+      flex-direction: column;
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+    .card:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0, 0, 0, .35); }
+    .card.bleach { --accent: var(--bleach); }
+    .card.trion { --accent: var(--trion); }
+    .card.tool { --accent: var(--tool); }
+    .kicker { font-size: .75rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); margin: 0 0 6px; font-weight: 600; }
+    .card h3 { margin: 0 0 8px; font-size: 1.4rem; line-height: 1.25; }
+    .card p.desc { margin: 0 0 16px; color: var(--muted); flex: 1; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 18px; padding: 0; list-style: none; }
+    .tags li { font-size: .75rem; padding: 3px 10px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); }
+    .links { display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn {
+      display: inline-block; text-decoration: none; font-weight: 600; font-size: .92rem;
+      padding: 9px 16px; border-radius: 9px; border: 1px solid var(--accent);
+      transition: background .15s ease, color .15s ease;
+    }
+    .btn.primary { background: var(--accent); color: #0a0d14; }
+    .btn.primary:hover { filter: brightness(1.1); }
+    .btn.ghost { color: var(--accent); }
+    .btn.ghost:hover { background: rgba(255, 255, 255, .06); }
+    a:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+    /* tools get their own, clearly separate block */
+    section.tools { margin-top: 26px; }
+    section.tools .grid { grid-template-columns: minmax(300px, 520px); }
+
+    footer { margin-top: 56px; padding: 26px 0 44px; border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; text-align: center; }
+    footer p { margin: 4px 0; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cube { animation: none; }
+      .card, .btn { transition: none; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <svg class="cube" viewBox="0 0 200 200" role="img" aria-label="vindfoxy cube logo">
+        <path d="M100 30 160 65 100 100 40 65Z" fill="#94e8ff"/>
+        <path d="M40 65 100 100V170L40 135Z" fill="#2aa8cf"/>
+        <path d="M100 100 160 65V135L100 170Z" fill="#1a6f93"/>
+        <g stroke="#06202b" stroke-width="2" stroke-linecap="round" fill="none" opacity=".55">
+          <path d="M130 47.5 70 82.5M70 47.5 130 82.5"/>
+          <path d="M70 82.5V152.5M100 135 40 100"/>
+          <path d="M130 82.5V152.5M160 100 100 135"/>
+        </g>
+        <g stroke="#e9fbff" stroke-width="2.5" stroke-linejoin="round" fill="none">
+          <path d="M100 30 160 65V135L100 170 40 135V65Z"/>
+          <path d="M40 65 100 100 160 65M100 100V170"/>
+        </g>
+      </svg>
+      <h1>vindfoxy</h1>
+      <p class="tagline">Fan-made tabletop RPGs and tools. Pick a project below.</p>
+    </header>
+
+    <main>
+      <section aria-labelledby="ttrpgs">
+        <div class="section-head"><h2 id="ttrpgs">Tabletop RPGs</h2></div>
+        <div class="grid">
+
+          <article class="card bleach">
+            <p class="kicker">Bleach TTRPG</p>
+            <h3>Spirit Pressure</h3>
+            <p class="desc">A Bleach-themed tabletop RPG built on D&amp;D 5e-style rules. Play a Soul Reaper, Quincy, Hollowborn or Fullbringer from level 1 to 20, with Reiatsu points and Kidō spells.</p>
+            <ul class="tags">
+              <li>5e-style</li>
+              <li>4 classes</li>
+              <li>Levels 1–20</li>
+            </ul>
+            <div class="links">
+              <a class="btn primary" href="https://vindfoxy-alt.github.io/bleach-ttrpg-Spirit-pressure/" rel="noopener">Open site</a>
+              <a class="btn ghost" href="https://github.com/vindfoxy-alt/bleach-ttrpg-Spirit-pressure" rel="noopener">Source</a>
+            </div>
+          </article>
+
+          <article class="card trion">
+            <p class="kicker">World Trigger TTRPG</p>
+            <h3>World Trigger TTRPG</h3>
+            <p class="desc">A d20 tabletop RPG with its own system: hit locations, a shared Trion and wound pool, trigger classes and 3 vs 3 combat. Comes with books, a character creator and an online tabletop.</p>
+            <ul class="tags">
+              <li>Own system</li>
+              <li>Hit locations</li>
+              <li>3 vs 3</li>
+            </ul>
+            <div class="links">
+              <a class="btn primary" href="https://vindfoxy-alt.github.io/world-trigger-ttrpg-fanmade/" rel="noopener">Open site</a>
+              <a class="btn ghost" href="https://github.com/vindfoxy-alt/world-trigger-ttrpg-fanmade" rel="noopener">Source</a>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <section class="tools" aria-labelledby="tools">
+        <div class="section-head"><h2 id="tools">Tools</h2></div>
+        <div class="grid">
+
+          <article class="card tool">
+            <p class="kicker">Anti-phishing</p>
+            <h3>Link Check</h3>
+            <p class="desc">A browser extension and web tool that checks whether a link is genuine or a phishing attempt, and warns you before a suspicious page opens.</p>
+            <ul class="tags">
+              <li>Browser extension</li>
+              <li>Phishing protection</li>
+            </ul>
+            <div class="links">
+              <a class="btn primary" href="https://vindfoxy-alt.github.io/link-check/" rel="noopener">Open site</a>
+              <a class="btn ghost" href="https://github.com/vindfoxy-alt/link-check" rel="noopener">Source</a>
+            </div>
+          </article>
+
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Bleach and World Trigger projects are unofficial fan works and are not affiliated with their creators or publishers.</p>
+      <p><a href="https://github.com/vindfoxy-alt" rel="noopener">github.com/vindfoxy-alt</a></p>
+    </footer>
+  </div>
+</body>
+</html>
